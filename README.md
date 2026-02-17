@@ -15,3 +15,4 @@ skills/
 ```
 
 More skills will be added over time.
+- `multi-agent-sync`: Multi-agent collaboration workflow with mandatory group-visible kickoff/progress/final sync.
