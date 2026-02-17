@@ -28,6 +28,7 @@ Primary delivery rule:
      - role split (who does what)
      - expected deliverables
      - default skills used in this run (Codex + multi-agent-sync when applicable)
+   - Auto-start a temporary watcher job at kickoff (cron/timer) for this task.
 2. **Dispatch tasks**
    - Send detailed instructions to each agent session.
    - Include required skill constraints in task text (e.g., coding agent must use Codex skill).
@@ -54,6 +55,8 @@ Primary delivery rule:
    - Prefer a temporary scheduled watcher for active tasks (timer/cron-style).
    - Watcher tick action: poll agent session history (e.g., topic3/topic5), then immediately publish rollup to topic1.
    - Completion action: when all agents are done/blocked, publish final closure and remove watcher immediately.
+   - This watcher lifecycle is mandatory whenever this skill is used.
+   - Expected behavior in practice: watcher tick posts rollup to topic1; when both worker topics reach done/blocked, watcher publishes closure and is removed in the same flow.
 
 4.6 **Dual mechanism (push + pull)**
    - Push: each agent must proactively post milestone updates in its own topic.
